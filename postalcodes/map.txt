@@ -1,6 +1,0 @@
-map op List vevangt for Loop
-neemt 2 argumenten
-map(deBewerking,deList)
-
-
-ik maak een dict van de txt kan later handig zijn bij opzoekwerk ...
