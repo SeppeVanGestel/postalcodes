@@ -23,7 +23,7 @@ def make_list(post_list):
         s.append(remove_newline)
         l.append(s)
 
-    
+    #print(l) 
     l2= []
     for code in range(len(l)):
         postcode = l[code][0][0]
@@ -34,7 +34,8 @@ def make_list(post_list):
         p_code =l[item][0][0]
         city =l[item][0][1]
         dict1[p_code] = city
-
+    
+    
     return dict1, l2, l        
 
 dict1, l2, l = make_list(post_list_raw)
@@ -63,7 +64,7 @@ def matching(postcode, list2):
             if count ==3:
                 list3.append(j)
     list3.sort()
-    print(list3)            
+    #print(list3)            
     return list3            
                     
 list3 = matching('2800',l2)
@@ -78,11 +79,34 @@ def print_result(l, list3):
     '15', '16', '17', '18', '19', '20',
     """
     for code2 in list3:
+        citylist = []
         for item in range(len(l)):
+            comparelist = [] # de huidige postcode uit alle postcodes
+            
             code = l[item][0][0]
             city = l[item][0][1]
+            
+            comparelist.append(code)
+            
+            
+            
+              
 
             if code2 == code:
-                print(code2 + ' - ' + city)
+                if code2 != comparelist[0]:
+                    print(code2 + ' - ' + city)
+            if code2 == comparelist[0]:
+                citylist.append(city)
+                
+        
+        city = ', '.join(citylist)
+        print(code2 + ' - ' + city)        
+         
+
+            
+            
+            
+            
+
 print_result(l, list3)                
 
