@@ -2,9 +2,17 @@ f = open("postalcodes\static\postalcodes.txt")
 
 post_list_raw = f.readlines()
 
-# post_list is een list, in lijst s gaan we de rommel er uit halen en alles in een dictionary zetten
+
+
 
 def make_dict(post_list):
+    """
+    It takes a list of strings, splits each string into a list of strings, and then creates a dictionary
+    where the first item in each list is the key and the second item is the value
+    
+    :param post_list: a list of strings, each string is a line from the file
+    :return: A dictionary with the postcode as the key and the city as the value.
+    """
 
     l= []
     for line in post_list:
@@ -21,10 +29,7 @@ def make_dict(post_list):
     for code in range(len(l)):
         postcode = l[code][0][0]
         l2.append(postcode)
-    #print(l2)    
-
-
-
+    
     dict1={}   
     for item in range(len(l)):
         p_code =l[item][0][0]
@@ -34,9 +39,18 @@ def make_dict(post_list):
 
 dict1 = make_dict(post_list_raw)
 
-# kijk of caharacters van de inputpostcodes in de postcode zitten en returned dit in dict2
+
+
 
 def matching(postcode, dictionary):
+    """
+    For each city in the dictionary, if the first four characters of the city name are in the postcode,
+    add the city name and the corresponding value to a new dictionary
+    
+    :param postcode: a string of the postcode
+    :param dictionary: a dictionary of cities and their corresponding postcodes
+    :return: A dictionary with the city as the key and the postcode as the value.
+    """
     dict2={}
     
     for city in dictionary:
@@ -52,9 +66,17 @@ def matching(postcode, dictionary):
                     
 dict2 = matching('2800',dict1)
 
-# sort postcode by value in list
+
+
 
 def sort(dictionary):
+    """
+    It takes a dictionary as input, converts the keys to integers, sorts the integers, converts the
+    integers back to strings, and returns a list of the sorted strings
+    
+    :param dictionary: a dictionary of the form {'code': 'name'}
+    :return: A list of the keys in the dictionary in ascending order.
+    """
     list1=[]
     list2=[]
 
@@ -73,18 +95,21 @@ def sort(dictionary):
 
 list2=sort(dict2)
 
-# check for citys with the same postalcodes => check with list for multiple keys
 
-def check_values():
-    pass
 
-# zoek met de values uit de list de values van de ditionary en print het resultaat
 
 def print_result(inputdict, codelist):
+    """
+    It takes a dictionary and a list as input, and prints the key-value pairs of the dictionary, where
+    the key is in the list
     
-        for pc in codelist:
-            city = inputdict[pc]
-            print('{} - {}'.format(pc, city ))
+    :param inputdict: a dictionary of postal codes and cities
+    :param codelist: list of postal codes
+    """
+    
+    for pc in codelist:
+        city = inputdict[pc]
+        print('{} - {}'.format(pc, city ))
         
 print_result(dict1,list2)
 
