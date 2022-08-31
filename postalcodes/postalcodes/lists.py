@@ -5,7 +5,7 @@ post_list_raw = f.readlines()
 
 
 
-def make_dict(post_list):
+def make_list(post_list):
     """
     It takes a list of strings, splits them into a list of lists, and then creates a dictionary from the
     first element of each list as the key and the second element as the value
@@ -37,7 +37,7 @@ def make_dict(post_list):
 
     return dict1, l2, l        
 
-dict1, l2, l = make_dict(post_list_raw)
+dict1, l2, l = make_list(post_list_raw)
 
 
 
@@ -62,7 +62,8 @@ def matching(postcode, list2):
                 break
             if count ==3:
                 list3.append(j)
-    list3.sort()            
+    list3.sort()
+    print(list3)            
     return list3            
                     
 list3 = matching('2800',l2)
