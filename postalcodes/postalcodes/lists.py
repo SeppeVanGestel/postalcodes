@@ -81,26 +81,33 @@ def print_result(l, list3):
     for code2 in list3:
         citylist = []
         for item in range(len(l)):
-            comparelist = [] # de huidige postcode uit alle postcodes
             
-            code = l[item][0][0]
-            city = l[item][0][1]
+            comparelist = []            # de huidige postcode uit alle postcodes
+
+            
+
+            code = l[item][0][0]        # komen uit lange list
+            city = l[item][0][1]        # komen uit lange list
             
             comparelist.append(code)
             
+            print(comparelist)
             
+            if code2 == comparelist[0]:
+                citylist.append(city)
+            print(citylist)
             
               
 
-            if code2 == code:
-                if code2 != comparelist[0]:
-                    print(code2 + ' - ' + city)
-            if code2 == comparelist[0]:
-                citylist.append(city)
-                
-        
+            # if code2 == code2 != comparelist[0]:
+            #     print(code2 + ' - ' + city)
+            
+            
+
         city = ', '.join(citylist)
-        print(code2 + ' - ' + city)        
+        #print(code2 + ' - ' + city)    
+        
+                
          
 
             
