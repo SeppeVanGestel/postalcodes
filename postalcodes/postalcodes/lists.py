@@ -6,13 +6,7 @@ post_list_raw = f.readlines()
 
 
 def make_list(post_list):
-    """
-    It takes a list of strings, splits them into a list of lists, and then creates a dictionary from the
-    first element of each list as the key and the second element as the value
     
-    :param post_list: a list of strings, each string is a line from the file
-    """
-
     city_code= []
     for line in post_list:
         
@@ -20,12 +14,7 @@ def make_list(post_list):
         remove_newline=remove_tab.replace("\n", "")
         citylist=remove_newline.split(",")
         
-        city_code.append(citylist)
-        
-        
-
-    #print(city_code) 
-    
+        city_code.append(citylist)   
 
     return city_code        
 
@@ -62,15 +51,9 @@ def matching(postcode, cityCode):
                 final_matches.append(matched_list)
     
     final_matches.sort()
-    #print(final_matches)    
-                    
     return final_matches           
                     
 final_matches = matching('2800', city_code)
-
-
-
-
 
 
 
@@ -82,23 +65,16 @@ def sort_result(all_matches):
     originals = []
     duplicates = []
     
-    
-
     for match in all_matches:
         code = match[0]
         city = match[1]
     
         if code in seen:
             duplicates.append(match)
-           
-                
+                   
         else:
             seen.append(code)
             originals.append(match)
-    
-   
-       
- 
     
     #print('seen:')
     #print(seen)
