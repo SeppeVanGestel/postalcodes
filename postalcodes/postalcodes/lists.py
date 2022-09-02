@@ -13,107 +13,104 @@ def make_list(post_list):
     :param post_list: a list of strings, each string is a line from the file
     """
 
-    l= []
+    city_code= []
     for line in post_list:
-        s=[]
+        
         remove_tab =line.replace("\t", ",")
         remove_newline=remove_tab.replace("\n", "")
-        remove_newline=remove_newline.split(",")
+        citylist=remove_newline.split(",")
         
-        s.append(remove_newline)
-        l.append(s)
+        city_code.append(citylist)
+        
+        
 
-    #print(l) 
-    l2= []
-    for code in range(len(l)):
-        postcode = l[code][0][0]
-        l2.append(postcode)
-       
-    dict1={}   
-    for item in range(len(l)):
-        p_code =l[item][0][0]
-        city =l[item][0][1]
-        dict1[p_code] = city
+    #print(city_code) 
     
-    
-    return dict1, l2, l        
 
-dict1, l2, l = make_list(post_list_raw)
+    return city_code        
 
-
+city_code = make_list(post_list_raw)
 
 
-def matching(postcode, list2):
-    """
-    It takes a postcode and a list of postcodes and returns a list of postcodes that match the first 3
-    digits of the postcode
-    
-    :param postcode: '2800'
-    :param list2: a list of lists, each list containing 3 strings
-    """
-    
-    list3 =[]
-    for j in list2: 
+
+
+def matching(postcode, cityCode):
+   
+    final_matches = []
+
+    for citys in cityCode: 
+        
+        #print(citys)
+        code = citys[0]
+        city = citys[1]
+        matched_list = []
+        
         count = 0
         
-        for i in j:
-            if i in postcode:
+        for number in code:
+            #print(number)
+
+            if number in postcode:
+                #print(number + 'in inputcode')
                 count +=1
-            if i not in postcode:
-                break
-            if count ==3:
-                list3.append(j)
-    list3.sort()
-    #print(list3)            
-    return list3            
-                    
-list3 = matching('2800',l2)
-
-def print_result(l, list3):
-    """
-    For each code2 in list3, for each item in the range of the length of l, if code2 is equal to code,
-    print code2 and city
+                if number not in postcode:
+                    break
+            if count ==4:
+                matched_list.append(code)
+                matched_list.append(city)
+                #print(matched_list)
+                final_matches.append(matched_list)
     
-    :param l: list of tuples
-    :param list3: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14',
-    '15', '16', '17', '18', '19', '20',
-    """
-    for code2 in list3:
-        citylist = []
-        for item in range(len(l)):
-            
-            comparelist = []            # de huidige postcode uit alle postcodes
+    final_matches.sort()
+    #print(final_matches)    
+                    
+    return final_matches           
+                    
+final_matches = matching('2800', city_code)
 
-            
 
-            code = l[item][0][0]        # komen uit lange list
-            city = l[item][0][1]        # komen uit lange list
-            
-            comparelist.append(code)
-            
-            print(comparelist)
-            
-            if code2 == comparelist[0]:
-                citylist.append(city)
-            print(citylist)
-            
-              
 
-            # if code2 == code2 != comparelist[0]:
-            #     print(code2 + ' - ' + city)
-            
-            
 
-        city = ', '.join(citylist)
-        #print(code2 + ' - ' + city)    
-        
+
+
+
+
+def sort_result(all_matches):
+    #print(all_matches)
+   
+    seen = []
+    originals = []
+    duplicates = []
+    
+    
+
+    for match in all_matches:
+        code = match[0]
+        city = match[1]
+    
+        if code in seen:
+            duplicates.append(match)
+           
                 
-         
+        else:
+            seen.append(code)
+            originals.append(match)
+    
+   
+       
+ 
+    
+    #print('seen:')
+    #print(seen)
+    print('')
+    print('duplicates:')
+    print(duplicates)
+    print('')
+    print('originals:')
+    print(originals)
 
-            
-            
-            
-            
-
-print_result(l, list3)                
+    return seen , duplicates
+        
+    
+seen, duplicates = sort_result(final_matches)              
 

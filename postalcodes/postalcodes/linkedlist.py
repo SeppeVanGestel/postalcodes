@@ -41,6 +41,18 @@ class linkedlist:
             cur_node=cur_node.next
             elems.append(cur_node.data)
         print(elems)
+    
+    def display_same(self):
+        elems = []
+        cur_node = self.head
+        
+        while cur_node.next != None:
+            if cur_node == cur_node.next:
+                print('ok')
+            
+            
+            
+        print(elems)    
 
     def get(self, index):
         if index >=self.length():
@@ -72,13 +84,15 @@ my_list = linkedlist()
 
 my_list.append(0)
 my_list.append(1)
+my_list.append(1)
+my_list.append(1)
 my_list.append(2)
 my_list.append(3)
 my_list.append(4)
 
 my_list.display()
-my_list.erase(1)
-my_list.display()
+
+my_list.display_same()
 
 
 
