@@ -79,12 +79,31 @@ def sort_result(all_matches):
     #print('seen:')
     #print(seen)
     print('')
+    print('originals:')
+    print(originals)
+    print('')
     print('duplicates:')
     print(duplicates)
     print('')
-    print('originals:')
-    print(originals)
+    print('result:')
+    print('')
 
+    
+    for i in all_matches:
+        
+        code = i[0]
+        city = i[1]
+        print(code + ' - ' + city)
+        
+        for j in duplicates:
+            
+            if i[0] == j[0]:
+                city = j[1]
+                code = j[0]
+
+                #print(code)
+                #print(city)
+                
     return seen , duplicates
         
     
